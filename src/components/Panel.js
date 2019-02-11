@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {setProps} from '../actions/index';
+import {setProps} from '../redux/actions';
 
 class Panel extends React.Component {
 

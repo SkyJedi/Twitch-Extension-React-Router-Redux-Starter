@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {setProps} from '../actions/index';
+import {setProps} from '../redux/actions';
 
 class Live_Config extends React.Component {
 
@@ -16,10 +16,8 @@ class Live_Config extends React.Component {
 	};
 
 	handleClick = () => {
-		const {content} = this.props,
-			text = !content ? 'You can haz Taco!' : false;
-		this.twitch.configuration.set('broadcaster', '', text);
-		this.twitch.send('broadcast', 'application/json', {content: text});
+		const {content} = this.props;
+		this.twitch.send('broadcast', 'application/json', {content: !content ? 'You can haz Taco!' : false});
 	};
 
 	render() {

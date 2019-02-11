@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {setProps} from '../actions/index';
+import {setProps} from '../redux/actions';
 
 class Video_Component extends React.Component {
 
@@ -9,7 +9,7 @@ class Video_Component extends React.Component {
 		return (
 			<div>
 				<h2>You're on the Video_Component page!</h2>
-				<h3>{this.props.text}</h3>
+				<h3>{this.props.content}</h3>
 			</div>
 		);
 	}
@@ -18,7 +18,6 @@ class Video_Component extends React.Component {
 const mapStateToProps = state => {
 	return {
 		content: state.content,
-		text: state.text
 	};
 };
 

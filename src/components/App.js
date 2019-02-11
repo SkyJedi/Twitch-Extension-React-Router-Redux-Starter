@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
-import {setProps} from '../actions';
+import {setProps} from '../redux/actions';
 import {Config, Home, Live_Config, Mobile, Panel, Video_Component, Video_Overlay} from './index';
 
 class App extends React.Component {
@@ -24,6 +24,7 @@ class App extends React.Component {
 
 			//listener for pubsub events
 			this.twitch.listen('broadcast', (target, contentType, body) => {
+				this.twitch.configuration.set('broadcaster', '', JSON.stringify(this.props.state));
 				this.props.setProps({...JSON.parse(body)});
 			});
 
@@ -36,8 +37,12 @@ class App extends React.Component {
 			//function to listen to configuration changes and sets state.content
 			this.twitch.configuration.onChanged(() => {
 				if (this.twitch.configuration.broadcaster) {
-					const data = this.twitch.configuration.broadcaster;
-					this.props.setProps({...data});
+					const {content} = this.twitch.configuration.broadcaster,
+						data = JSON.parse(content);
+					if (typeof data === 'object') {
+						Object.keys(data).forEach(key => this.props.setProps({[key]: data[key]}));
+					}
+
 				}
 			});
 
@@ -76,6 +81,7 @@ class App extends React.Component {
 
 const mapStateToProps = state => {
 	return {
+		state: state,
 		theme: state.theme
 	};
 };
