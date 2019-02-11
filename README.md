@@ -15,6 +15,8 @@ This project will get you started developing Twitch Extensions using React!
 `yarn start` or `npm run start`
 
 3. It will tell you the paths to the different pages in the console, e.g. "https://localhost:8080/panel.html". Go to this address in your browser.
+    
+    - Note:  Testing on localhost in browser, isAuth will also return false so you will always just see loading.   You can set {isAuth : true} in `App.js` and each component to see layout, but any this.Twitch functions will not work until you are in DevRig or Twitch proper.
 
 4. Open file in `src/components/Panel.js`, change `<h2>You're on the Panel page!</h2>` to something cool and watch it being updated live in the browser!
 
@@ -60,6 +62,12 @@ In Short:
 To create the ZIP, after successfully testing the extension, run "npm run package". This will create a new ZIP file in the project root named after the current version set in your package.json.
 
 In your extension's settings under Versions -> Version Assets, upload the created ZIP file. Then your're ready to move to "Hosted Test" in the Version Status section.
+
+## Setting Redux State
+
+This is a very basic and simple example.  Currently it is set up to update the state when a pubsub is sent via `twitch.ext.send()` and then update redux state and also set the state to `twitch.ext.configuration`. 
+
+As `twitch.ext.configuration` is limited to `limited to 5 KB and can be set at most 20 times per minute.` storing the entire redux state is not a viable production solution. As such it is advised to set up an EBS,
 
 ## Alternative
 

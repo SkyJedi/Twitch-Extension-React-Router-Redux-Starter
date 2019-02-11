@@ -7,12 +7,12 @@ import {Config, Home, Live_Config, Mobile, Panel, Video_Component, Video_Overlay
 
 class App extends React.Component {
 	twitch = window.Twitch ? window.Twitch.ext : null;
-	state = {isVisible: true, isAuth: false};
+	state = {isVisible: true, isAuth: false, theme: 'light'};
 
 	//changes the theme from light to dark
 	contextUpdate = (context, delta) => {
 		if (delta.includes('theme')) {
-			this.props.setProps({theme: context.theme});
+			this.setState({theme: context.theme});
 		}
 	};
 
@@ -24,7 +24,8 @@ class App extends React.Component {
 
 			//listener for pubsub events
 			this.twitch.listen('broadcast', (target, contentType, body) => {
-				this.twitch.configuration.set('broadcaster', '', JSON.stringify(this.props.state));
+				const {...data} = this.props.state;
+				this.twitch.configuration.set('broadcaster', '', JSON.stringify(data));
 				this.props.setProps({...JSON.parse(body)});
 			});
 
@@ -35,6 +36,7 @@ class App extends React.Component {
 			this.twitch.onContext((context, delta) => this.contextUpdate(context, delta));
 
 			//function to listen to configuration changes and sets state.content
+			//This function should be replaced with an EBS for production
 			this.twitch.configuration.onChanged(() => {
 				if (this.twitch.configuration.broadcaster) {
 					const {content} = this.twitch.configuration.broadcaster,
@@ -56,13 +58,13 @@ class App extends React.Component {
 	};
 
 	render() {
-		const {theme} = this.props;
+		const {theme, isAuth, isVisible} = this.state;
 
 		//show empty <div>when invisible
-		if (!this.state.isVisible) return <div/>;
+		if (!isVisible) return <div/>;
 
 		//show loading when user is being authenticated
-		if (!this.state.isAuth) return <div>Loading...</div>;
+		if (!isAuth) return <div>Loading...</div>;
 
 		//display the router
 		return <Router>
@@ -82,7 +84,6 @@ class App extends React.Component {
 const mapStateToProps = state => {
 	return {
 		state: state,
-		theme: state.theme
 	};
 };
 
