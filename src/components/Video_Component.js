@@ -3,14 +3,13 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {setProps} from '../actions/index';
 
-class Config extends React.Component {
+class Video_Component extends React.Component {
 
 	render() {
-		const {data} = this.props;
 		return (
 			<div>
-				<h2>Video_Component</h2>
-				<h2>{data}</h2>
+				<h2>You're on the Video_Component page!</h2>
+				<h3>{this.props.text}</h3>
 			</div>
 		);
 	}
@@ -18,11 +17,11 @@ class Config extends React.Component {
 
 const mapStateToProps = state => {
 	return {
-		data: state.data,
-		theme: state.theme
+		content: state.content,
+		text: state.text
 	};
 };
 
 const matchDispatchToProps = dispatch => bindActionCreators({setProps}, dispatch);
 
-export default connect(mapStateToProps, matchDispatchToProps)(Config);
+export default connect(mapStateToProps, matchDispatchToProps)(Video_Component);

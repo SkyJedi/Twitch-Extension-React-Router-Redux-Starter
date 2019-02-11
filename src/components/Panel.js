@@ -6,11 +6,10 @@ import {setProps} from '../actions/index';
 class Panel extends React.Component {
 
 	render() {
-		const {data} = this.props;
 		return (
 			<div>
-				<h2>Panel</h2>
-				<h2>{data}</h2>
+				<h2>You're on the Panel page!</h2>
+				<h3>{this.props.content}</h3>
 			</div>
 		);
 	}
@@ -18,8 +17,7 @@ class Panel extends React.Component {
 
 const mapStateToProps = state => {
 	return {
-		data: state.data,
-		theme: state.theme
+		content: state.content,
 	};
 };
 

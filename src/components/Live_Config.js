@@ -5,12 +5,30 @@ import {setProps} from '../actions/index';
 
 class Live_Config extends React.Component {
 
+	twitch = window.Twitch ? window.Twitch.ext : null;
+	state = {isAuth: false};
+
+	componentDidMount() {
+		if (this.twitch) {
+			//Authorize the user
+			this.twitch.onAuthorized(() => this.setState({isAuth: true}));
+		} else console.log('Twitch helper not loading!');
+	};
+
+	handleClick = () => {
+		const {content} = this.props,
+			text = !content ? 'You can haz Taco!' : false;
+		this.twitch.configuration.set('broadcaster', '', text);
+		this.twitch.send('broadcast', 'application/json', {content: text});
+	};
+
 	render() {
-		const {data} = this.props;
+		if (!this.state.isAuth) return <div>Loading...</div>;
 		return (
 			<div>
-				<h2>Live_Config</h2>
-				<h2>{data}</h2>
+				<h2>You're on the Live_Config page!</h2>
+				<button onClick={this.handleClick}>Give/Remove Taco</button>
+				<h3>The users {this.props.content ? 'haz' : 'no haz'} Taco</h3>
 			</div>
 		);
 	}
@@ -18,8 +36,7 @@ class Live_Config extends React.Component {
 
 const mapStateToProps = state => {
 	return {
-		data: state.data,
-		theme: state.theme
+		content: state.content,
 	};
 };
 

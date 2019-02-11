@@ -4,5 +4,5 @@ const loadingReducer = (type, state, action) => {
 };
 
 export const content = (state = null, action) => loadingReducer('content', state, action);
-export const data = (state = null, action) => loadingReducer('data', state, action);
+export const twitch = (state = null, action) => loadingReducer('twitch', state, action);
 export const theme = (state = 'light', action) => loadingReducer('theme', state, action);

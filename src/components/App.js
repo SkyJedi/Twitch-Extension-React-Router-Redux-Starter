@@ -24,8 +24,7 @@ class App extends React.Component {
 
 			//listener for pubsub events
 			this.twitch.listen('broadcast', (target, contentType, body) => {
-				/*const data = JSON.parse(body);
-				this.setState({data});*/
+				this.props.setProps({...JSON.parse(body)});
 			});
 
 			//hide extension when user changes visibility
@@ -37,10 +36,11 @@ class App extends React.Component {
 			//function to listen to configuration changes and sets state.content
 			this.twitch.configuration.onChanged(() => {
 				if (this.twitch.configuration.broadcaster) {
-					const {content} = this.twitch.configuration.broadcaster;
-					this.props.setProps({content: JSON.parse(content)});
+					const data = this.twitch.configuration.broadcaster;
+					this.props.setProps({...data});
 				}
 			});
+
 		} else console.log('Twitch helper not loading!');
 	};
 

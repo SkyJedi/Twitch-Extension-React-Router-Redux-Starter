@@ -1,68 +1,66 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Twitch Extension React Router Redux Starter
 
-## Available Scripts
+readme mostly copied from [embiem/twitch-extension-starter](https://github.com/embiem/twitch-extension-starter)
 
-In the project directory, you can run:
+This project will get you started developing Twitch Extensions using React!
 
-### `npm start`
+## Getting started
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Install with yarn or npm:
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+`yarn` or `npm install`
 
-### `npm test`
+2. Bundle and start development server:
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`yarn start` or `npm run start`
 
-### `npm run build`
+3. It will tell you the paths to the different pages in the console, e.g. "https://localhost:8080/panel.html". Go to this address in your browser.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. Open file in `src/components/Panel.js`, change `<h2>You're on the Panel page!</h2>` to something cool and watch it being updated live in the browser!
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+5. Happy hacking!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Testing on Twitch
 
-### `npm run eject`
+To test your extension on Twitch while running the development server (`yarn start` as described above), follow these steps:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Create your Twitch extension at [https://dev.twitch.tv](https://dev.twitch.tv)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. Inside your extension versions, under "Asset Hosting", insert the correct values
+    - `Testing Base URI` (by default: `https://localhost:8080/`)
+    - `Panel Viewer Path` (default: `panel.html`)
+    - `Config Path` (default: `config.html`)
+    - `Live-Config Path` (default: `live_config.html`) 
+    - `Video_Component Path` (default: `video_component.html`) 
+    - `Video_Overlay Path` (default: `video_overlay.html`) 
+    - `Mobile Path` (default: `mobile.html`) 
+    
+    These are the pages defined under `App.js`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+3. On the Versions -> Version Status page, click the "View on Twitch and Install" button.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+4. Install your extension. You should be redirected to your config page and already see the content (default: "You're on the Live_Config page!")
 
-## Learn More
+5. Go back to the extensions inside your streamer dashboard, locate your extension under "Installed Extensions" and "Activate" your new extension.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+6. Go to your channel and see the Viewer page of your extension integrated on Twitch! Make any changes and see them change live!!
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+7. Lastly go to your live streamer dashboard and see your live config page displayed in the Extensions widget!
 
-### Code Splitting
+In Short:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+* Your viewer page is being displayed on your channel either as a video overlay (when your channel is live) or panel. You can choose between overlay or panel when creating the extension.
 
-### Analyzing the Bundle Size
+* Your config page is being displayed in your streamer's extensions dashboard, after installing the extension.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+* Your live config page is being displayed in your streamer's live dashboard, after installing and activating the extension.
 
-### Making a Progressive Web App
+## Packaged ZIP
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+To create the ZIP, after successfully testing the extension, run "npm run package". This will create a new ZIP file in the project root named after the current version set in your package.json.
 
-### Advanced Configuration
+In your extension's settings under Versions -> Version Assets, upload the created ZIP file. Then your're ready to move to "Hosted Test" in the Version Status section.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+## Alternative
 
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+There's now an official developer-rig by TwitchDev, which gives you a more integrated environment. For an official solution, please go to https://github.com/twitchdev/developer-rig. You could also combine the rig with this starter code.

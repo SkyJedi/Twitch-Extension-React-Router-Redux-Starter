@@ -6,11 +6,10 @@ import {setProps} from '../actions/index';
 class Video_Overlay extends React.Component {
 
 	render() {
-		const {data} = this.props;
 		return (
 			<div>
-				<h2>Video_Overlaye</h2>
-				<h2>{data}</h2>
+				<h2>You're on the Video_Overlay page!</h2>
+				<h3>{this.props.text}</h3>
 			</div>
 		);
 	}
@@ -18,8 +17,8 @@ class Video_Overlay extends React.Component {
 
 const mapStateToProps = state => {
 	return {
-		data: state.data,
-		theme: state.theme
+		content: state.content,
+		text: state.text
 	};
 };
 

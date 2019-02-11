@@ -1,6 +1,8 @@
 {
   "name": "twitch-extension-react-router-redux-starter",
   "version": "0.1.0",
+  "author": "SkyJedi",
+  "license": "MIT",
   "dependencies": {
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
@@ -13,10 +15,15 @@
     "start": "export HTTPS=true&&PORT=8080 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "zip": "cd build/ && bestzip ../$npm_package_name-$npm_package_version.zip *",
+    "package": "npm run build && npm run zip"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "devDependencies": {
+    "bestzip": "^2.1.2"
   },
   "browserslist": [
     ">0.2%",
